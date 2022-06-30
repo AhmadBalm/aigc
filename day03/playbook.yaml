@@ -1,0 +1,19 @@
+- name: Install nginx
+  hosts: all
+  tasks:
+  - name: Install nginx
+    apt:
+      update_cache: yes
+      name: nginx
+      state: present
+  - name: Remove apt lock file
+    file:
+      state: absent
+      path: "/var/lib/dpkg/lock-frontend"
+    become: true
+    tags: apt
+  - name: Start nginx
+    systemd: 
+      name: nginx
+      state: started
+      enabled: yes

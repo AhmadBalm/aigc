@@ -1,0 +1,13 @@
+- name: connectivity test
+  hosts: all
+  become: yes
+  vars:
+    server_name: "{{ ansible_default_ipv4.address }}"
+    document_root: /var/www/html
+    app_root: html_demo_site-main
+  tasks: 
+  - name: Ping all the target servers
+    ping:
+  - name: Echo variables
+    debug:
+      msg: ansible_user {{ ansible_user }}
